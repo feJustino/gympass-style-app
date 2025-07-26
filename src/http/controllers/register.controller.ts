@@ -17,9 +17,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     const registerUseCase = new RegisterUseCase(usersRepository)
 
     await registerUseCase.execute({ name, email, password })
-
   } catch (error) {
-
     return reply.code(409).send({ message: 'Email já cadastrado' })
   }
 
