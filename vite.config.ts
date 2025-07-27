@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     globals: true,
     coverage: {
-      include: ['src/usecases/**/**', 'src/repositories/**'],
+      include: ['src/usecases/**.ts'],
     },
   },
 })
