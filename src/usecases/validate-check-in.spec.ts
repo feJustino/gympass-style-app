@@ -34,4 +34,17 @@ describe('Validate Check-in UseCase', () => {
       sut.execute({ checkinId: 'unexistent-checkin-id' }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
+
+  it('should be not able to validate the check-in after pass 20 minutes', async () => {
+    vi.setSystemTime(new Date(2025, 0, 20, 8, 0, 0))
+    const createdCheckin = await checkInsRepository.create({
+      gym_id: 'gym-01',
+      user_id: 'user-01',
+    })
+    const TWENTY_ONE_MINUTES_IN_MS = 1000 * 60 * 21
+    vi.advanceTimersByTime(TWENTY_ONE_MINUTES_IN_MS)
+    await expect(
+      sut.execute({ checkinId: createdCheckin.id }),
+    ).rejects.toBeInstanceOf(Error)
+  })
 })
