@@ -29,8 +29,6 @@ describe('Authenticate Controller', () => {
       },
     })
 
-    console.log(response.json())
-
     expect(response.statusCode).toEqual(200)
     expect(response.json()).toEqual({ token: expect.any(String) })
   })
