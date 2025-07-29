@@ -11,11 +11,11 @@ describe('Search Gyms Controller', () => {
     await app.close()
   })
   it('should be able to search gyms by title', async () => {
-    const { token } = await createAndAuthenticateUser(app)
+    const { token } = await createAndAuthenticateUser(app, true)
 
     await app.inject({
       method: 'POST',
-      url: '/gyms/create',
+      url: '/gyms',
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -30,7 +30,7 @@ describe('Search Gyms Controller', () => {
 
     await app.inject({
       method: 'POST',
-      url: '/gyms/create',
+      url: '/gyms',
       headers: {
         authorization: `Bearer ${token}`,
       },
