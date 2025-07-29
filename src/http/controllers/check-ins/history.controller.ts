@@ -15,5 +15,5 @@ export async function history(request: FastifyRequest, reply: FastifyReply) {
     page,
   })
 
-  return reply.code(200).send(checkIns)
+  return reply.code(200).send({ checkIns })
 }
