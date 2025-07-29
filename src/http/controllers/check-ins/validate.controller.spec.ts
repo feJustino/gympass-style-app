@@ -12,11 +12,11 @@ describe('Validate Checkin Controller', () => {
     await app.close()
   })
   it('should be able to validate to check-in', async () => {
-    const { token } = await createAndAuthenticateUser(app)
+    const { token } = await createAndAuthenticateUser(app, true)
 
     const gymResponse = await app.inject({
       method: 'POST',
-      url: '/gyms/create',
+      url: '/gyms',
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -48,10 +48,6 @@ describe('Validate Checkin Controller', () => {
       url: `/check-ins/${checkIn.id}/validate`,
       headers: {
         authorization: `Bearer ${token}`,
-      },
-      payload: {
-        latitude: -22.8360352,
-        longitude: -47.202852,
       },
     })
 

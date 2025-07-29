@@ -4,7 +4,7 @@ import z from 'zod'
 
 export async function validate(request: FastifyRequest, reply: FastifyReply) {
   const validateCheckinParamschema = z.object({
-    checkinId: z.uuid(),
+    checkinId: z.string(),
   })
   const { checkinId } = validateCheckinParamschema.parse(request.params)
 

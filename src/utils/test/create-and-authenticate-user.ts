@@ -1,3 +1,5 @@
+import { prisma } from '@/lib/prisma'
+import { hash } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 
 interface CreateAndAuthenticateUserResponse {
@@ -6,14 +8,14 @@ interface CreateAndAuthenticateUserResponse {
 
 export async function createAndAuthenticateUser(
   app: FastifyInstance,
+  isAdmin = false,
 ): Promise<CreateAndAuthenticateUserResponse> {
-  await app.inject({
-    method: 'POST',
-    url: '/users',
-    payload: {
+  await prisma.user.create({
+    data: {
       name: 'John Doe',
       email: 'john@example.com',
-      password: '123456',
+      password_hash: await hash('123456', 6),
+      role: isAdmin ? 'ADMIN' : 'MEMBER',
     },
   })
 

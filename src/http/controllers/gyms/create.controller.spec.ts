@@ -11,11 +11,11 @@ describe('Create Gym Controller', () => {
     await app.close()
   })
   it('should be able to create a gym', async () => {
-    const { token } = await createAndAuthenticateUser(app)
+    const { token } = await createAndAuthenticateUser(app, true)
 
     const response = await app.inject({
       method: 'POST',
-      url: '/gyms/create',
+      url: '/gyms',
       headers: {
         authorization: `Bearer ${token}`,
       },
